@@ -1,0 +1,118 @@
+// DOM Elements
+const addItemBtn = document.getElementById('addItemBtn');
+const modal = document.getElementById('modal');
+const saveItemBtn = document.getElementById('saveItemBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const itemNameInput = document.getElementById('itemNameInput');
+const itemQtyInput = document.getElementById('itemQtyInput');
+const inventoryTable = document.getElementById('inventoryTable');
+const searchInput = document.getElementById('searchInput');
+
+let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
+
+// Show Modal
+addItemBtn.addEventListener('click', () => {
+  modal.classList.remove('hidden');
+  itemNameInput.value = '';
+  itemQtyInput.value = '';
+  itemNameInput.focus();
+});
+
+// Hide Modal
+closeModalBtn.addEventListener('click', () => {
+  modal.classList.add('hidden');
+});
+
+// Save New Item
+saveItemBtn.addEventListener('click', () => {
+  const name = itemNameInput.value.trim();
+  const qty = parseInt(itemQtyInput.value);
+
+  if (name && !isNaN(qty)) {
+    inventory.push({ name, qty });
+    updateInventory();
+    modal.classList.add('hidden');
+  }
+});
+
+// Render Inventory Table
+function renderTable(data) {
+  inventoryTable.innerHTML = '';
+
+  data.forEach((item, index) => {
+    const row = document.createElement('tr');
+
+    // Item Name
+    const nameTd = document.createElement('td');
+    nameTd.textContent = item.name;
+    row.appendChild(nameTd);
+
+    // Quantity
+    const qtyTd = document.createElement('td');
+    qtyTd.textContent = item.qty;
+    row.appendChild(qtyTd);
+
+    // Actions
+    const actionTd = document.createElement('td');
+    actionTd.className = 'actions';
+
+    const plusBtn = document.createElement('button');
+    plusBtn.textContent = '+';
+    plusBtn.className = 'add';
+    plusBtn.onclick = () => {
+      item.qty++;
+      updateInventory();
+    };
+
+    const minusBtn = document.createElement('button');
+    minusBtn.textContent = '-';
+    minusBtn.className = 'sub';
+    minusBtn.onclick = () => {
+      if (item.qty > 0) item.qty--;
+      updateInventory();
+    };
+
+    const delBtn = document.createElement('button');
+    delBtn.textContent = '🗑';
+    delBtn.className = 'delete';
+    delBtn.onclick = () => {
+      inventory.splice(index, 1);
+      updateInventory();
+    };
+
+    actionTd.append(plusBtn, minusBtn, delBtn);
+    row.appendChild(actionTd);
+
+    // Alert
+    const alertTd = document.createElement('td');
+    if (item.qty === 0) {
+      alertTd.textContent = 'Out of Stock';
+      alertTd.className = 'alert-empty';
+    } else if (item.qty <= 5) {
+      alertTd.textContent = 'Low Stock';
+      alertTd.className = 'alert-low';
+    } else {
+      alertTd.textContent = 'OK';
+      alertTd.className = 'alert-ok';
+    }
+    row.appendChild(alertTd);
+
+    inventoryTable.appendChild(row);
+  });
+}
+
+// Update LocalStorage and Refresh Table
+function updateInventory() {
+  localStorage.setItem('inventory', JSON.stringify(inventory));
+  renderTable(inventory);
+}
+
+// Search Items
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  const filtered = inventory.filter(item => item.name.toLowerCase().includes(query));
+  renderTable(filtered);
+});
+
+// Initial Load
+updateInventory();
