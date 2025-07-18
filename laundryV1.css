@@ -20,13 +20,15 @@ body {
     background-color: hsl(202, 100%, 50%);
     width: 90%;
     max-width: 500px;
-    margin: 0 auto;
-    padding: auto 0;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 16px;
     justify-content: center;
     align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Header */
