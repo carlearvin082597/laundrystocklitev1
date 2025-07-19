@@ -322,6 +322,25 @@ footer {
 	align-self: flex-end;
 	text-align: center;
 }
+
+  font-size: 0.9rem;
+  margin-top: 20px;
+  color: #444;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: #0077cc;
+  margin: 0 5px;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: #004a99;
+  text-decoration: none;
+}
+
+/* Reuse existing .modal and .modal-content styles */
 /* Responsive */
 @media (max-width: 600px) {
   table {
