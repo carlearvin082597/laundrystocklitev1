@@ -296,7 +296,14 @@ th {
     background-color: #f87171;
     color: white;
 }
-
+/* Footer */
+footer {
+	position: absolute;
+	display: flex;
+	flex-directon: column;
+	align-self: flex-end;
+	
+}
 /* Responsive */
 @media (max-width: 600px) {
   table {
