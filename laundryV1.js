@@ -76,9 +76,13 @@ function renderTable(data) {
     delBtn.textContent = '🗑';
     delBtn.className = 'delete';
     delBtn.onclick = () => {
+    const confirmDelete = confirm(`Are you sure you want to delete "${item.name}"?`);
+    if (confirmDelete) {
       inventory.splice(index, 1);
       updateInventory();
-    };
+    }
+  };
+
 
     actionTd.append(plusBtn, minusBtn, delBtn);
     row.appendChild(actionTd);
