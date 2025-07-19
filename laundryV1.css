@@ -323,21 +323,6 @@ footer {
 	text-align: center;
 }
 
-footer a {
-  font-size: 0.9rem;
-  margin-top: 20px;
-  color: #444;
-  tex-decoration: none;
-}
-.section-box {
-  margin-top: 20px;
-  padding: 1rem;
-  background: #f9f9f9;
-  border-top: 1px solid #ccc;
-}
-.hidden {
-  display: none;
-
 /* Reuse existing .modal and .modal-content styles */
 /* Responsive */
 @media (max-width: 600px) {
