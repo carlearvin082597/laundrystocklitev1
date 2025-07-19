@@ -147,23 +147,3 @@ document.getElementById('exportCsvBtn').addEventListener('click', () => {
   link.click();
   document.body.removeChild(link);
 });
-
-// Modal trigger for footer links
-const footerLinks = document.querySelectorAll('.footer-link');
-const allModals = document.querySelectorAll('.modal');
-const closeButtons = document.querySelectorAll('.close-modal');
-
-footerLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const modalId = `modal-${link.dataset.modal}`;
-    document.getElementById(modalId).classList.remove('hidden');
-  });
-});
-
-// Close buttons
-closeButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    btn.closest('.modal').classList.add('hidden');
-  });
-});
