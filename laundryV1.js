@@ -116,3 +116,30 @@ searchInput.addEventListener('input', () => {
 
 // Initial Load
 updateInventory();
+
+// Export to CSV
+document.getElementById('exportCsvBtn').addEventListener('click', () => {
+  if (inventory.length === 0) {
+    alert("Inventory is empty.");
+    return;
+  }
+
+  const headers = ["Item Name", "Quantity"];
+  const rows = inventory.map(item => [item.name, item.qty]);
+
+  let csvContent = headers.join(",") + "\n";
+
+  rows.forEach(row => {
+    csvContent += row.join(",") + "\n";
+  });
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "laundry-inventory.csv";
+  link.style.display = "none";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
