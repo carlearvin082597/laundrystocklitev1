@@ -147,3 +147,22 @@ document.getElementById('exportCsvBtn').addEventListener('click', () => {
   link.click();
   document.body.removeChild(link);
 });
+
+// Footer links 
+const footerLinks = document.querySelectorAll('.footer-link');
+const expandBox = document.getElementById('expand-section');
+
+const contents = {
+  privacy: "<h3>Privacy Policy</h3><p>Your data is safe with us.</p>",
+  terms: "<h3>Terms & Conditions</h3><p>Use responsibly.</p>",
+  contact: "<h3>Contact</h3><p>Email: laundryshop@example.com</p>"
+};
+
+footerLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const section = link.dataset.expand;
+    expandBox.innerHTML = contents[section];
+    expandBox.classList.remove('hidden');
+  });
+});
