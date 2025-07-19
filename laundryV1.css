@@ -329,6 +329,14 @@ footer a {
   color: #444;
   tex-decoration: none;
 }
+.section-box {
+  margin-top: 20px;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-top: 1px solid #ccc;
+}
+.hidden {
+  display: none;
 
 /* Reuse existing .modal and .modal-content styles */
 /* Responsive */
