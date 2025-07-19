@@ -302,7 +302,7 @@ footer {
 	display: flex;
 	flex-direction: column;
 	align-self: flex-end;
-	
+	text-align: center;
 }
 /* Responsive */
 @media (max-width: 600px) {
