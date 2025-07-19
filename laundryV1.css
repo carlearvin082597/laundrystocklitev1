@@ -177,6 +177,23 @@ table {
   overflow: hidden;
 }
 
+.table-wrapper {
+  max-height: 300px; /* You can adjust this value */
+  overflow-y: auto;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional scrollbar styling for WebKit browsers */
+.table-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+.table-wrapper::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
 th, td {
   padding: 12px;
   text-align: center;
@@ -317,5 +334,11 @@ footer {
 
   .modal-content {
     padding: 15px;
+  }
+}
+
+@media (max-height: 700px) {
+  .table-wrapper {
+    max-height: 200px;
   }
 }
