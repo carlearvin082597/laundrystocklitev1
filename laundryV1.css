@@ -300,7 +300,7 @@ th {
 footer {
 	position: absolute;
 	display: flex;
-	flex-directon: column;
+	flex-direction: column;
 	align-self: flex-end;
 	
 }
