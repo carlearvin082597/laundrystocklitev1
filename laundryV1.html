@@ -9,11 +9,12 @@
 </head>
 <body>
 <div class="container">
+<main>
+<div class="container">
     <header>
     <h1>LaundryStock Lite 🧺📦</h1>
     <p>Track and manage your laundry shop supplies</p>
-    <button id="addItemBtn"  class="addItemBtn addBtn"><span>Proceed</span><span>+ Add New Item</span></button>
-    <button id="exportCsvBtn" class="addItemBtn addBtn"><span>Proceed</span><span>📥 Download Data</span></button> 
+    <button id="addItemBtn" class="addItemBtn addBtn"><span>Proceed</span><span>+ Add New Item</span></button> 
     </header>
     <main>
     <input type="text" id="searchInput" placeholder="Search supplies..." />
@@ -33,6 +34,9 @@
     </table>
     </div>
   </main>
+  <div style="margin-top: 16px; text-align: center;">
+ 	 <button id="exportCsvBtn" class="addItemBtn addBtn"><span>Proceed</span><span>📥 Download Data</span></button>
+  </div>
 
   
   <!-- Optional: Add Item Modal -->
@@ -46,15 +50,35 @@
     </div>
   </div>
 </div>
+</main>
+  <!-- Privacy Modal -->
+  <dialog id="privacyModal">
+	<h3>Privacy Policy</h3>
+	<p>Your privacy is very important to us..</p>
+	<button onclick="privacyModal.close()">Close</button>
+  </dialog>
+<!-- Terms Modal -->
+  <dialog id="termsModal">
+	<h3>Terms and Condition</h3>
+	<p>Please read carefully..</p>
+	<button onclick="termsModal.close()">Close</button>
+  </dialog>
+<!-- Contact Modal -->
+  <dialog id="contactModal">
+	<h3>Conctact Me</h3>
+	<p>Email: carlearvinnonacido@gmail.com</p>
+	<p>CP#: 09381853252</p>
+	<button onclick="contactModal.close()">Close</button>
+  </dialog>
 	
 <!-- ======= Footer ======= -->
   <footer class="footer">
     <p>&copy; 2025 LaundryStock Lite<br> All rights reserved.<br>
 	    Developer: Carl Earvin B. Nonacido<br></p>
     <div class="footer-links">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="#">Contact</a>
+      <a href="#" onclick="document.getElementById('privacyModal').showModal()">Privacy</a>
+      <a href="#" onclick="document.getElementById('termsModal').showModal()">Terms</a>
+      <a href="#" onclick="document.getElementById('contactModal').showModal()">Contact</a>
     </div>
   </footer>
  <div id="expand-section" class="hidden section-box"></div>
