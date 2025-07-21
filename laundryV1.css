@@ -1,5 +1,4 @@
-/* General Reset */
-* {
+* {	
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -9,11 +8,16 @@ body {
   font-family: "Segoe UI", sans-serif;
   background-color: white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
   color: #333;
+}
+
+main {
+  flex: 1; /* take up available space */
 }
 
 .container {
@@ -314,13 +318,67 @@ th {
     background-color: #f87171;
     color: white;
 }
+
+/* Dialog */
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 2rem;
+  border: none;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-out;
+  text-align: center;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+dialog button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+dialog button:hover {
+  background-color: #666;
+}
+
 /* Footer */
 footer {
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	align-self: flex-end;
-	text-align: center;
+  margin-top: 40px; /* give some spacing from content above */
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer p {
+	font-size: 12px;
 }
 
 /* Reuse existing .modal and .modal-content styles */
