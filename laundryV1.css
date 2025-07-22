@@ -1,169 +1,460 @@
-// DOM Elements
-const addItemBtn = document.getElementById('addItemBtn');
-const modal = document.getElementById('modal');
-const saveItemBtn = document.getElementById('saveItemBtn');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const itemNameInput = document.getElementById('itemNameInput');
-const itemQtyInput = document.getElementById('itemQtyInput');
-const inventoryTable = document.getElementById('inventoryTable');
-const searchInput = document.getElementById('searchInput');
-
-let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
-
-// Show Modal
-addItemBtn.addEventListener('click', () => {
-  modal.classList.remove('hidden');
-  itemNameInput.value = '';
-  itemQtyInput.value = '';
-  itemNameInput.focus();
-});
-
-// Hide Modal
-closeModalBtn.addEventListener('click', () => {
-  modal.classList.add('hidden');
-});
-
-// Save New Item
-saveItemBtn.addEventListener('click', () => {
-  const name = itemNameInput.value.trim();
-  const qty = parseInt(itemQtyInput.value);
-
-  if (name && !isNaN(qty)) {
-    inventory.push({ name, qty });
-    updateInventory();
-    modal.classList.add('hidden');
-  }
-});
-
-// Render Inventory Table
-function renderTable(data) {
-  inventoryTable.innerHTML = '';
-
-  data.forEach((item, index) => {
-    const row = document.createElement('tr');
-
-    // Item Name
-    const nameTd = document.createElement('td');
-    nameTd.textContent = item.name;
-    row.appendChild(nameTd);
-
-    // Quantity
-    const qtyTd = document.createElement('td');
-    qtyTd.textContent = item.qty;
-    row.appendChild(qtyTd);
-
-    // Actions
-    const actionTd = document.createElement('td');
-    actionTd.className = 'actions';
-
-    const plusBtn = document.createElement('button');
-    plusBtn.textContent = '+';
-    plusBtn.className = 'add';
-    plusBtn.onclick = () => {
-      item.qty++;
-      updateInventory();
-    };
-
-    const minusBtn = document.createElement('button');
-    minusBtn.textContent = '-';
-    minusBtn.className = 'sub';
-    minusBtn.onclick = () => {
-      if (item.qty > 0) item.qty--;
-      updateInventory();
-    };
-
-    const delBtn = document.createElement('button');
-    delBtn.textContent = '🗑';
-    delBtn.className = 'delete';
-    delBtn.onclick = () => {
-    const confirmDelete = confirm(`Are you sure you want to delete "${item.name}"?`);
-    if (confirmDelete) {
-      inventory.splice(index, 1);
-      updateInventory();
-    }
-  };
-
-
-    actionTd.append(plusBtn, minusBtn, delBtn);
-    row.appendChild(actionTd);
-
-    // Alert
-    const alertTd = document.createElement('td');
-    if (item.qty === 0) {
-      alertTd.textContent = 'Out of Stock';
-      alertTd.className = 'alert-empty';
-    } else if (item.qty <= 5) {
-      alertTd.textContent = 'Low Stock';
-      alertTd.className = 'alert-low';
-    } else {
-      alertTd.textContent = 'OK';
-      alertTd.className = 'alert-ok';
-    }
-    row.appendChild(alertTd);
-
-    inventoryTable.appendChild(row);
-  });
+	/* General Reset */
+* {	
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-// Update LocalStorage and Refresh Table
-function updateInventory() {
-  localStorage.setItem('inventory', JSON.stringify(inventory));
-  renderTable(inventory);
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #e9dede;
+  min-height: 100vh;
+  padding: 20px;
+  color: #333;
 }
 
-// Search Items
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-  const filtered = inventory.filter(item => item.name.toLowerCase().includes(query));
-  renderTable(filtered);
-});
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
 
-// Initial Load
-updateInventory();
+.container {
+    background: #EEAECA;
+    background: radial-gradient(circle,rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 10px 10px 20px #babecc, 
+                -10px -10px 20px #ffffff;
+}
 
-// Export to CSV
-document.getElementById('exportCsvBtn').addEventListener('click', () => {
-  if (inventory.length === 0) {
-    alert("Inventory is empty.");
-    return;
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #222;
+}
+
+p {
+  margin: 5px 0 10px;
+  font-size: 1rem;
+  color: #666;
+}
+
+.addItemBtn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.addBtn {
+    position: relative;
+    right: 20px;
+    bottom: 20px;
+    border:none;
+    box-shadow: none;
+    width: 130px;
+    height: 40px;
+    line-height: 42px;
+    -webkit-perspective: 230px;
+    perspective: 230px;
+}
+.addBtn span {
+    background: rgb(0,172,238);
+    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+    display: block;
+    position: absolute;
+    width: 130px;
+    height: 40px;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    border-radius: 5px;
+    margin:0;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.addBtn span:nth-child(1) {
+    box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
+  -webkit-transform: rotateX(90deg);
+  -moz-transform: rotateX(90deg);
+  transform: rotateX(90deg);
+  -webkit-transform-origin: 50% 50% -20px;
+  -moz-transform-origin: 50% 50% -20px;
+  transform-origin: 50% 50% -20px;
+}
+
+.addBtn span:nth-child(2) {
+  -webkit-transform: rotateX(0deg);
+  -moz-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+  -webkit-transform-origin: 50% 50% -20px;
+  -moz-transform-origin: 50% 50% -20px;
+  transform-origin: 50% 50% -20px;
+}
+
+.addBtn:hover span:nth-child(1) {
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  -webkit-transform: rotateX(0deg);
+  -moz-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+
+.addBtn:hover span:nth-child(2) {
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+ color: transparent;
+  -webkit-transform: rotateX(-90deg);
+  -moz-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+}
+
+/* Search */
+input {
+    /* all: unset; */
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.8);
+    transition: border .3s ease-in-out;
+}
+input:focus {
+    border-color: #aa00ff;
+}
+input::placeholder {
+    font-style: italic;
+    font-size: 0.9rem;
+}
+#searchInput {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 20px;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+}
+
+.table-wrapper {
+  max-height: 300px; /* You can adjust this value */
+  overflow-y: auto;
+  overflow: auto;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional scrollbar styling for WebKit browsers */
+.table-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+.table-wrapper::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+  vertical-align: middle;
+  height: 48px;
+  font-size: 0.9rem;
+}
+
+th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  z-index: 2;
+}
+
+.actions button {
+  margin: 0 2px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.actions .add {
+  background-color: #22c55e;
+  color: white;
+}
+
+.actions .add:hover {
+  background-color: #16a34a;
+}
+
+.actions .sub {
+  background-color: #ef4444;
+  color: white;
+}
+
+.actions .sub:hover {
+  background-color: #dc2626;
+}
+
+.actions .delete {
+  background-color: #6b7280;
+  color: white;
+}
+
+.actions .delete:hover {
+    background-color: #575d68;
+}
+
+.alert-ok {
+  color: green;
+  font-weight: bold;
+}
+
+.alert-low {
+  color: #eab308;
+  font-weight: bold;
+}
+
+.alert-empty {
+  color: red;
+  font-weight: bold;
+}
+
+/* Modal */
+#modal.hidden {
+    display: none;
+}
+
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure modal is above sticky thead */
+}
+
+.modal-content {
+    background: white;
+    padding: 20px 32px 20px 20px; /* Increased right padding */
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.modal-content h3 {
+    margin-bottom: 10px;
+}
+
+.modal-content input {
+    width: 100%;
+    margin-right: 5px; /* Space between inputs */
+    margin-bottom: 10px;
+    padding: 8px 16px 8px 8px; /* More right padding for input */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.modal-content button {
+    padding: 8px 12px;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.addNewItem {
+        width: 100%;
+        padding: 10px 16px 10px 10px; /* More right padding */
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+}
+
+#itemNameInput,
+#itemQtyInput {
+        width: calc(50% - 10px);
+}
+
+#saveItemBtn {
+    background-color: #3b82f6;
+    color: white;
+}
+
+#closeModalBtn {
+    background-color: #f87171;
+    color: white;
+}
+
+#footBtn {
+    background-color: #3b82f6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#footBtn:hover {
+    background-color: #2563eb;
+}
+
+/* Dialog */
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 2rem;
+  border: none;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-out;
+  text-align: center;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+dialog button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+dialog button:hover {
+  background-color: #666;
+}
+
+/* Footer */
+footer {
+  margin-top: 40px; /* give some spacing from content above */
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer p {
+	font-size: 12px;
+}
+
+.footer-links a {
+  color: #3b82f6;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+  color: #2563eb;
+}
+
+/* Reuse existing .modal and .modal-content styles */
+/* Responsive */
+@media (max-width: 600px) {
+  table {
+    font-size: 0.9rem;
   }
 
-  const headers = ["Item Name", "Quantity"];
-  const rows = inventory.map(item => [item.name, item.qty]);
+  th, td {
+    padding: 8px;
+  }
 
-  let csvContent = headers.join(",") + "\n";
+  .modal-content {
+    padding: 15px;
+  }
+}
 
-  rows.forEach(row => {
-    csvContent += row.join(",") + "\n";
-  });
-
-  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "laundry-inventory.csv";
-  link.style.display = "none";
-
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-});
-
-// Modal trigger for footer links
-const footerLinks = document.querySelectorAll('.footer-link');
-const allModals = document.querySelectorAll('.modal');
-const closeButtons = document.querySelectorAll('.close-modal');
-
-footerLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const modalId = `modal-${link.dataset.modal}`;
-    document.getElementById(modalId).classList.remove('hidden');
-  });
-});
-
-// Close buttons
-closeButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    btn.closest('.modal').classList.add('hidden');
-  });
-});
+@media (max-height: 700px) {
+  .table-wrapper {
+    max-height: 200px;
+  }
+}
