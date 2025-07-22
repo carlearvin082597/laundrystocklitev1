@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="container">
+<body>
 <main>
 <div class="container">
     <header>
@@ -43,7 +43,30 @@
   <div id="modal" class="hidden">
     <div class="modal-content">
       <h3>Add New Item</h3>
-      <input type="text" id="itemNameInput" placeholder="Item name" />
+      <input list="itemList" type="text" id="itemNameInput" placeholder="Item name" />
+        <datalist id="itemList">
+            <option value="Detergent"></option>
+            <option value="Fabric Softener"></option>
+            <option value="Bleach"></option>
+            <option value="Stain Remover"></option>
+            <option value="Laundry Bags"></option>
+            <option value="Dryer Sheets"></option>
+            <option value="Washing Powder"></option>
+            <option value="Oxygen Bleach"></option>
+            <option value="Color Catchers"></option>
+            <option value="Lint Rollers"></option>
+            <option value="Wool Dryer Balls"></option>
+            <option value="Ironing Spray"></option>
+            <option value="Filter"></option>
+            <option value="Packing Tape"></option>
+            <option value="Scotch Tape"></option>
+            <option value="Zonrox Colorsafe"></option>
+            <option value="Plastic 20x30"></option>
+            <option value="Plastic 16x24"></option>
+            <option value="Net"></option>
+            <option value="Filter"></option>
+            <option value="Sponge"></option>
+            </datalist>
       <input type="number" id="itemQtyInput" placeholder="Quantity" />
       <button id="saveItemBtn">Save</button>
       <button id="closeModalBtn">Cancel</button>
@@ -54,27 +77,27 @@
   <!-- Privacy Modal -->
   <dialog id="privacyModal">
 	<h3>Privacy Policy</h3>
-	<p>Your privacy is very important to us..</p>
-	<button onclick="privacyModal.close()">Close</button>
+	<p>When you use LaundryStock Lite, we only collect information necessary to make the app work and improve your experience, such as basic usage data and any content you choose to create or share within the app. We respect your privacy and don't sell your personal information to third parties. Any data we do collect is kept secure and used only to operate and enhance LaundryStock Lite. If you have questions, please reach out to us at carlearvinnonacido@gmail.com.</p>
+	<button id="footBtn" onclick="privacyModal.close()">Close</button>
   </dialog>
 <!-- Terms Modal -->
   <dialog id="termsModal">
 	<h3>Terms and Condition</h3>
-	<p>Please read carefully..</p>
-	<button onclick="termsModal.close()">Close</button>
+	<p>By using LaundryStock Lite, you agree to use it responsibly and lawfully. You are solely responsible for any content you create or share through the app. We grant you a limited, non-exclusive, non-transferable license to use the app for your personal, non-commercial use. We reserve the right to modify or discontinue the app at any time and may update these terms. If you violate these terms, your access to the app may be terminated. We are not liable for any damages arising from your use of the app, and you use it at your own risk.</p>
+    <p>For more details, please refer to our full Terms of Service on our website.</p>
+	<button id="footBtn" onclick="termsModal.close()">Close</button>
   </dialog>
 <!-- Contact Modal -->
   <dialog id="contactModal">
 	<h3>Conctact Me</h3>
-	<p>Email: carlearvinnonacido@gmail.com</p>
-	<p>CP#: 09381853252</p>
-	<button onclick="contactModal.close()">Close</button>
+	<p><a href="mailto:carlearvinnonacido@gmail.com">carlearvinnonacido@gmail.com</a></p>
+	<button id="footBtn" onclick="contactModal.close()">Close</button>
   </dialog>
 	
 <!-- ======= Footer ======= -->
   <footer class="footer">
     <p>&copy; 2025 LaundryStock Lite<br> All rights reserved.<br>
-	    Developer: Carl Earvin B. Nonacido<br></p>
+	    Carl Earvin B. Nonacido<br></p>
     <div class="footer-links">
       <a href="#" onclick="document.getElementById('privacyModal').showModal()">Privacy</a>
       <a href="#" onclick="document.getElementById('termsModal').showModal()">Terms</a>
@@ -82,6 +105,6 @@
     </div>
   </footer>
  <div id="expand-section" class="hidden section-box"></div>
-<script type="text/javascript" src="laundryV1.js"></script>
+  <script src="laundryV1.js" type="text/javascript"></script>
 </body>
 </html>
