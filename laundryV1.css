@@ -323,6 +323,12 @@ th {
   font-weight: bold;
 }
 
+#inventoryTable tbody tr.no-results td {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
+
 td {
     background-color: var(--bg-color);
     color: var(--text-color);
