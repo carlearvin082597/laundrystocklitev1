@@ -128,12 +128,31 @@ function filterInventory(query) {
 function updateTableVisibility(filtered) {
   const rows = document.querySelectorAll("#inventoryTable tbody tr");
 
-  // Assumes inventory and rows are in same order
+  let visibleCount = 0;
+
   rows.forEach((row, index) => {
     const item = inventory[index];
     const match = filtered.includes(item);
     row.style.display = match ? "" : "none";
+    if (match) visibleCount++;
   });
+
+  // Handle "No results" message
+  const tbody = document.querySelector("#inventoryTable tbody");
+  const existingNoResult = document.querySelector(".no-results");
+
+  if (visibleCount === 0) {
+    if (!existingNoResult) {
+      const noResultRow = document.createElement("tr");
+      noResultRow.classList.add("no-results");
+      noResultRow.innerHTML = `<td colspan="3" style="text-align:center; color: #999;">No results found</td>`;
+      tbody.appendChild(noResultRow);
+    }
+  } else {
+    if (existingNoResult) {
+      existingNoResult.remove();
+    }
+  }
 }
 
 // 🛠️ Render table from scratch
@@ -143,23 +162,21 @@ function renderTable(data) {
 
   if (data.length === 0) {
     const noResultRow = document.createElement("tr");
+    noResultRow.classList.add("no-results");
     noResultRow.innerHTML = `
       <td colspan="3" style="text-align:center; color: #999;">No results found</td>
     `;
     tbody.appendChild(noResultRow);
-    noResultRow.classList.add("no-results");
     return;
   }
 
   data.forEach(item => {
     const row = document.createElement("tr");
-
     row.innerHTML = `
       <td>${item.name}</td>
       <td>${item.quantity}</td>
       <td>${item.branch}</td>
     `;
-
     tbody.appendChild(row);
   });
 }
@@ -170,7 +187,6 @@ searchInput.addEventListener("input", () => {
   const filtered = filterInventory(query);
   const rows = document.querySelectorAll("#inventoryTable tbody tr");
 
-  // If table is in sync with inventory, just show/hide
   if (rows.length === inventory.length) {
     updateTableVisibility(filtered);
   } else {
