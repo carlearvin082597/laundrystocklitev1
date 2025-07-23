@@ -3,8 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LaundryStock Lite - Manage your laundry supplies efficiently.">
+  <meta name="author" content="Carl Earvin B. Nonacido">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LaundryStock Lite">
+  <meta name="twitter:description" content="Track and manage your laundry shop supplies with ease.">
+  <meta name="twitter:image" content="Photos/laundry-thumbnail.png">
+  <meta property="og:title" content="LaundryStock Lite - Carl Earvin B. Nonacido">
+  <meta property="og:description" content="A simple app to manage laundry supplies.">
+  <meta property="og:image" content="Photos/laundry-thumbnail.png">
+  <meta property="og:url" content="https://carlearvin082597.github.io/laundrystocklitev1/laundryV1.html">
   <title>LaundryStock Lite</title>
   <link rel="stylesheet" href="laundryV1.css" />
+  <link rel="shortcut icon" href="image/520922497_1434148044499102_9132393150352300126_n.jpg" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -13,7 +24,8 @@
   <span class="slider">
     <span class="icon">🌙</span>
   </span>
-</label><main>
+</label>
+<main>
 <div class="container">
     <header>
     <h1>LaundryStock Lite 🧺📦</h1>
@@ -21,7 +33,17 @@
     <button id="addItemBtn" class="addItemBtn addBtn"><span>Proceed</span><span>+ Add New Item</span></button> 
     </header>
     <main>
-    <input type="text" id="searchInput" placeholder="Search supplies..." />
+<div class="search-wrapper">
+  <div class="search-container" id="searchContainer">
+    <button id="searchToggle" class="search-icon">🔍</button>
+    <input
+      type="text"
+      id="searchInput"
+      class="search-input"
+      placeholder="Search supplies..."
+    />
+  </div>
+</div>
     <div class="table-wrapper">
     <table>
       <thead>
