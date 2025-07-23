@@ -170,25 +170,16 @@ closeButtons.forEach(btn => {
 
 // Dark Mode Toggle
 
-const toggleButton = document.getElementById('toggleDarkMode');
-const body = document.body;
+const toggle = document.getElementById('toggleDarkMode');
+const icon = document.querySelector('.slider .icon');
 
-  // Load theme from localStorage
-  if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark');
-    toggleButton.textContent = '☀️ Light Mode';
+toggle.addEventListener('change', function () {
+  document.body.classList.toggle('dark');
+
+  // Emoji swap
+  if (document.body.classList.contains('dark')) {
+    icon.textContent = '☀️';
   } else {
-    toggleButton.textContent = '🌙 Dark Mode';
+    icon.textContent = '🌙';
   }
-
-  toggleButton.addEventListener('click', () => {
-    body.classList.toggle('dark');
-    
-    if (body.classList.contains('dark')) {
-      toggleButton.textContent = '☀️ Light Mode';
-      localStorage.setItem('theme', 'dark');
-    } else {
-      toggleButton.textContent = '🌙 Dark Mode';
-      localStorage.setItem('theme', 'light');
-    }
-  });
+});
