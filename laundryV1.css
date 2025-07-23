@@ -5,12 +5,28 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --table-header: #f0f0f0;
+  --hover-color: #f9f9f9;
+  --border-color: #ccc;
+}
+
+body.dark {
+  --bg-color: #1e1e1e;
+  --text-color: #f0f0f0;
+  --table-header: #333333;
+  --hover-color: #2c2c2c;
+  --border-color: #555;
+}
+
 body {
-  font-family: "Segoe UI", sans-serif;
-  background-color: #e9dede;
+  font-family: "Lato", sans-serif;
+  background-color: var(--bg-color);
   min-height: 100vh;
   padding: 20px;
-  color: #333;
+  color: var(--text-color);
 }
 
 main {
@@ -148,6 +164,30 @@ p {
   transform: rotateX(-90deg);
 }
 
+.toggleBtn {
+    background-color: #3b82f6;
+    position: fixed; 
+    top: 20px; 
+    right: 20px; 
+    border-radius: 5px;
+    padding: 5px 10px;
+    z-index: 1001;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px #babecc;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.toggleBtn:hover {
+    background-color: #2563eb;
+    transform: scale(1.05);
+}
+
+.toggleBtn::after {
+    font-size: 1.2rem;
+}
+
 /* Search */
 input {
     /* all: unset; */
@@ -177,6 +217,8 @@ input::placeholder {
 
 /* Table */
 table {
+  background-color: var(--bg-color);
+  color: var(--text-color);
   width: 100%;
   border-collapse: collapse;
   background: white;
@@ -212,18 +254,24 @@ th, td {
 }
 
 th {
-  background-color: #f0f0f0;
+  background-color: var(--table-header);
+  color: var(--text-color);
   font-weight: bold;
 }
 
+td {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
 tr:hover {
-  background-color: #f9f9f9;
+  background-color: var(--hover-color);
 }
 
 thead th {
   position: sticky;
   top: 0;
-  background-color: #f0f0f0;
+  background-color: var(--bg-color);
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   z-index: 2;
 }
@@ -317,6 +365,14 @@ thead th {
     border-radius: 5px;
     border: 1px solid #ccc;
     box-sizing: border-box;
+}
+
+input,
+.modal-content,
+dialog {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
 }
 
 .modal-content button {
