@@ -44,6 +44,7 @@ main {
 }
 
 .container {
+    position: relative;
     background: #EEAECA;
     background: radial-gradient(circle,rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
     width: 90%;
@@ -170,30 +171,46 @@ p {
   transform: rotateX(-90deg);
 }
 
-.toggleBtn {
-    background-color: #3b82f6;
-    position: absolute; 
-    top: 20px; 
-    right: 20px; 
-    border-radius: 5px;
-    padding: 5px 10px;
-    z-index: 1001;
-    color: white;
-    border: none;
-    cursor: pointer;
-    box-shadow: 5px 5px 10px #babecc;
-    transition: background 0.3s, transform 0.3s;
+/* Dark Mode Toggle */
+.theme-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
 }
 
-.toggleBtn:hover {
-    background-color: #2563eb;
-    transform: scale(1.05);
+.theme-switch input {
+  display: none;
 }
 
-.toggleBtn::after {
-    font-size: 1.2rem;
+.slider {
+  background-color: var(--border-color);
+  border-radius: 20px;
+  width: 60px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4),
+		inset 0px -5px 15px rgba(255, 255, 255, 0.4);
 }
 
+.slider .icon {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+input:checked + .slider {
+  background-color: #fbc531; /* brighter for light mode */
+  justify-content: flex-end;
+}
+
+input:checked + .slider .icon {
+  content: "🌙";
+}
 /* Search */
 input {
     /* all: unset; */
