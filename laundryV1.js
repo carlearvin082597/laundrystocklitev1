@@ -116,27 +116,57 @@ function updateInventory() {
 }
 
 // Search Items
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-  const filtered = inventory.filter(item =>
+
+// 📦 Filter inventory based on search query
+function filterInventory(query) {
+  return inventory.filter(item =>
     item.name.toLowerCase().includes(query)
   );
+}
 
+// 👁️ Show/Hide table rows based on filtered results
+function updateTableVisibility(filtered) {
   const rows = document.querySelectorAll("#inventoryTable tbody tr");
 
-  // If table rows match inventory length, use show/hide method
+  // Assumes inventory and rows are in same order
+  rows.forEach((row, index) => {
+    const item = inventory[index];
+    const match = filtered.includes(item);
+    row.style.display = match ? "" : "none";
+  });
+}
+
+// 🛠️ Render table from scratch
+function renderTable(data) {
+  const tbody = document.querySelector("#inventoryTable tbody");
+  tbody.innerHTML = ""; // Clear existing rows
+
+  data.forEach(item => {
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td>${item.quantity}</td>
+      <td>${item.branch}</td>
+    `;
+
+    tbody.appendChild(row);
+  });
+}
+
+// 🎯 Main search event handler
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+  const filtered = filterInventory(query);
+  const rows = document.querySelectorAll("#inventoryTable tbody tr");
+
+  // If table is in sync with inventory, just show/hide
   if (rows.length === inventory.length) {
-    rows.forEach((row, index) => {
-      const item = inventory[index];
-      const match = filtered.includes(item);
-      row.style.display = match ? "" : "none";
-    });
+    updateTableVisibility(filtered);
   } else {
-    // Fallback: safely re-render the filtered result
     renderTable(filtered);
   }
 });
-
 
 // Initial Load
 updateInventory();
