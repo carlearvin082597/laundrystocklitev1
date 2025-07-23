@@ -116,14 +116,25 @@ function updateInventory() {
 }
 
 // Search Items
-searchInput.addEventListener("keyup", function () {
-  const filter = searchInput.value.toLowerCase();
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  const filtered = inventory.filter(item =>
+    item.name.toLowerCase().includes(query)
+  );
+
   const rows = document.querySelectorAll("#inventoryTable tbody tr");
 
-  rows.forEach(function (row) {
-    const text = row.textContent.toLowerCase();
-    row.style.display = text.includes(filter) ? "" : "none";
-  });
+  // If table rows match inventory length, use show/hide method
+  if (rows.length === inventory.length) {
+    rows.forEach((row, index) => {
+      const item = inventory[index];
+      const match = filtered.includes(item);
+      row.style.display = match ? "" : "none";
+    });
+  } else {
+    // Fallback: safely re-render the filtered result
+    renderTable(filtered);
+  }
 });
 
 
