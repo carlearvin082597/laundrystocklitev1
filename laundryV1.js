@@ -116,11 +116,16 @@ function updateInventory() {
 }
 
 // Search Items
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-  const filtered = inventory.filter(item => item.name.toLowerCase().includes(query));
-  renderTable(filtered);
+searchInput.addEventListener("keyup", function () {
+  const filter = searchInput.value.toLowerCase();
+  const rows = document.querySelectorAll("#inventoryTable tbody tr");
+
+  rows.forEach(function (row) {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(filter) ? "" : "none";
+  });
 });
+
 
 // Initial Load
 updateInventory();
