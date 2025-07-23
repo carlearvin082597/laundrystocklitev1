@@ -147,6 +147,7 @@ function renderTable(data) {
       <td colspan="3" style="text-align:center; color: #999;">No results found</td>
     `;
     tbody.appendChild(noResultRow);
+    noResultRow.classList.add("no-results");
     return;
   }
 
