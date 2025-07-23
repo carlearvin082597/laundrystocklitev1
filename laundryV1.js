@@ -167,3 +167,28 @@ closeButtons.forEach(btn => {
     btn.closest('.modal').classList.add('hidden');
   });
 });
+
+// Dark Mode Toggle
+
+const toggleButton = document.getElementById('toggleDarkMode');
+const body = document.body;
+
+  // Load theme from localStorage
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark');
+    toggleButton.textContent = '☀️ Light Mode';
+  } else {
+    toggleButton.textContent = '🌙 Dark Mode';
+  }
+
+  toggleButton.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    
+    if (body.classList.contains('dark')) {
+      toggleButton.textContent = '☀️ Light Mode';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      toggleButton.textContent = '🌙 Dark Mode';
+      localStorage.setItem('theme', 'light');
+    }
+  });
