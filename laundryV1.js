@@ -141,6 +141,15 @@ function renderTable(data) {
   const tbody = document.querySelector("#inventoryTable tbody");
   tbody.innerHTML = ""; // Clear existing rows
 
+  if (data.length === 0) {
+    const noResultRow = document.createElement("tr");
+    noResultRow.innerHTML = `
+      <td colspan="3" style="text-align:center; color: #999;">No results found</td>
+    `;
+    tbody.appendChild(noResultRow);
+    return;
+  }
+
   data.forEach(item => {
     const row = document.createElement("tr");
 
