@@ -22,6 +22,7 @@ body.dark {
 }
 
 body {
+  position: relative;
   font-family: "Lato", sans-serif;
   background-color: var(--bg-color);
   min-height: 100vh;
@@ -37,6 +38,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 60px;
   flex: 1;
 }
 
@@ -169,7 +171,7 @@ p {
 
 .toggleBtn {
     background-color: #3b82f6;
-    position: fixed; 
+    position: absolute; 
     top: 20px; 
     right: 20px; 
     border-radius: 5px;
