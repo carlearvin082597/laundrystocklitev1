@@ -7,6 +7,10 @@ const itemNameInput = document.getElementById('itemNameInput');
 const itemQtyInput = document.getElementById('itemQtyInput');
 const inventoryTable = document.getElementById('inventoryTable');
 const searchInput = document.getElementById('searchInput');
+const toggle = document.getElementById('toggleDarkMode');
+const icon = document.querySelector('.slider .icon');
+const searchToggle = document.getElementById('searchToggle');
+const searchContainer = document.getElementById('searchContainer');
 
 let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
 
@@ -170,9 +174,6 @@ closeButtons.forEach(btn => {
 
 // Dark Mode Toggle
 
-const toggle = document.getElementById('toggleDarkMode');
-const icon = document.querySelector('.slider .icon');
-
 toggle.addEventListener('change', function () {
   document.body.classList.toggle('dark');
 
@@ -181,5 +182,22 @@ toggle.addEventListener('change', function () {
     icon.textContent = '☀️';
   } else {
     icon.textContent = '🌙';
+  }
+});
+
+// Input 
+searchToggle.addEventListener('click', () => {
+  searchContainer.classList.toggle('active');
+
+  // Auto-focus input after expanding
+  if (searchContainer.classList.contains('active')) {
+    setTimeout(() => searchInput.focus(), 300);
+  }
+});
+
+// Optional: Close input when clicking outside
+document.addEventListener('click', (e) => {
+  if (!searchContainer.contains(e.target)) {
+    searchContainer.classList.remove('active');
   }
 });
