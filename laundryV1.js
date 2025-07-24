@@ -116,7 +116,6 @@ function updateInventory() {
 }
 
 // Search Items
-
 searchInput.addEventListener('input', () => {
   const query = searchInput.value.toLowerCase();
   const filtered = inventory.filter(item => item.name.toLowerCase().includes(query));
