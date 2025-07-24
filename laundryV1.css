@@ -6,7 +6,7 @@
 }
 
 :root {
-  --bg-color: #ffffff;
+  --bg-color: #fbf5df;
   --text-color: #333333;
   --table-header: #f0f0f0;
   --hover-color: #f9f9f9;
@@ -281,6 +281,7 @@ input:checked + .slider .icon {
 
 /* Table */
 table {
+  table-layout: fixed;
   background-color: var(--bg-color);
   color: var(--text-color);
   width: 100%;
@@ -290,9 +291,9 @@ table {
 }
 
 .table-wrapper {
+  scrollbar-gutter: stable;
   max-height: 300px; /* You can adjust this value */
-  overflow-y: auto;
-  overflow: auto;
+  overflow-y: scroll;
   width: 100%;
   border-radius: 10px;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
@@ -321,12 +322,6 @@ th {
   background-color: var(--table-header);
   color: var(--text-color);
   font-weight: bold;
-}
-
-#inventoryTable tbody tr.no-results td {
-  text-align: center;
-  color: #777;
-  font-style: italic;
 }
 
 td {
