@@ -31,9 +31,39 @@
     <h1>LaundryStock Lite 🧺📦</h1>
     <p>Track and manage your laundry shop supplies</p>
     <button id="addItemBtn" class="addItemBtn addBtn"><span>Proceed</span><span>+ Add New Item</span></button> 
+    <p>
+      <div class="branchSlt">
+      <label for="branchSelect">Select Branch:</label>
+      <select id="branchSelect">
+        <optgroup label="MiiNel">
+          <option value="bitan-o">Bitan-O</option>
+          <option value="bibincahan">Bibincahan</option>
+          <option value="bacon">Bacon</option>
+          <option value="roro">Roro</option>
+        </optgroup>
+        <optgroup label="Heather">
+          <option value="pangpang">Pangpang</option>
+          <option value="gate3">Gate 3</option>
+          <option value="cabid-an">Cabid-an</option>
+          <option value="carwash">Carwash</option>
+        </optgroup>
+        <optgroup label="Fluff n' Fold">
+          <option value="cabid-an>Cabid-an</option>
+          <option value="balogo">Balogo</option>
+          <option value="tugos">Tugos</option>
+          <option value="pangpang">Pangpang</option>
+        </optgroup>
+        <optgroup label="Hendrix">
+          <option value="mahingan">Mahingan</option>
+        </optgroup>
+      </select>
+    </div>
+    </p>
+    
     </header>
-    <main>
-<div class="search-wrapper">
+
+
+  <div class="search-wrapper">
   <div class="search-container" id="searchContainer">
     <button id="searchToggle" class="search-icon">🔍</button>
     <input
@@ -59,7 +89,7 @@
       </tbody>
     </table>
     </div>
-  </main>
+  
   <div style="margin-top: 16px; text-align: center;">
  	 <button id="exportCsvBtn" class="addItemBtn addBtn"><span>Proceed</span><span>📥 Download Data</span></button>
   </div>
@@ -99,11 +129,10 @@
     </div>
   </div>
 </div>
-</main>
   <!-- Privacy Modal -->
   <dialog id="privacyModal">
 	<h3>Privacy Policy</h3>
-	<p>When you use LaundryStock Lite, we only collect information necessary to make the app work and improve your experience, such as basic usage data and any content you choose to create or share within the app. We respect your privacy and don't sell your personal information to third parties. Any data we do collect is kept secure and used only to operate and enhance LaundryStock Lite. If you have questions, please reach out to us at <a href="mailto:carlearvinnonacido@gmail.com">carlearvinnonacido@gmail.com</a>.</p>
+	<p>When you use LaundryStock Lite, we only collect information necessary to make the app work and improve your experience, such as basic usage data and any content you choose to create or share within the app. We respect your privacy and don't sell your personal information to third parties. Any data we do collect is kept secure and used only to operate and enhance LaundryStock Lite. If you have questions, please reach out to us at carlearvinnonacido@gmail.com.</p>
 	<button id="footBtn" onclick="privacyModal.close()">Close</button>
   </dialog>
 <!-- Terms Modal -->
@@ -119,7 +148,8 @@
 	<p><a href="mailto:carlearvinnonacido@gmail.com">carlearvinnonacido@gmail.com</a></p>
 	<button id="footBtn" onclick="contactModal.close()">Close</button>
   </dialog>
-	
+
+</main>
 <!-- ======= Footer ======= -->
   <footer class="footer">
     <p>&copy; 2025 LaundryStock Lite<br> All rights reserved.<br>
