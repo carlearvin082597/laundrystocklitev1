@@ -6,7 +6,7 @@
 }
 
 :root {
-  --bg-color: #f0f8ff;
+  --bg-color: #d9eaf5;
   --text-color: #333333;
   --table-header: #f0f0f0;
   --hover-color: #f9f9f9;
@@ -44,8 +44,7 @@ main {
 
 .container {
     position: relative;
-    background: #EEAECA;
-    background: radial-gradient(circle,rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    background: linear-gradient(to bottom, #c9a8f4, #409eff);
     width: 90%;
     max-width: 600px;
     padding: 20px;
@@ -55,6 +54,7 @@ main {
     justify-content: center;
     align-items: center;
     border: 1px solid #ccc;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 
@@ -78,7 +78,7 @@ p {
 .addItemBtn {
   width: 130px;
   height: 40px;
-  color: #fff;
+  color: var(--text-color);
   border-radius: 5px;
   padding: 10px 25px;
   font-family: 'Lato', sans-serif;
@@ -210,6 +210,139 @@ input:checked + .slider .icon {
   content: "🌙";
 }
 
+/* Branch Selector */
+.branchSlt {
+      margin-top: 1.5rem;
+    }
+#branchSelect {
+      background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+      padding-right: 1rem;
+      color: var(--text-color);
+}
+
+.branchSlt label {
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+
+.branchSlt select {
+    padding: 0.4rem 0.7rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+p {
+  display: flex;
+  gap: 10px;
+}
+
+label {
+  width: fit-content;
+  align-self: center;
+}
+
+select {
+  flex: 1;
+}
+
+select {
+  border: 2px solid #ddd;
+  background: #eee;
+  padding: 10px;
+  transition: 0.4s;
+}
+
+select:hover,
+select:focus {
+  background: #ddd;
+}
+select::picker-icon {
+  color: var(--text-color);
+  transition: 0.4s rotate;
+}
+select:open::picker-icon {
+  rotate: 180deg;
+}
+::picker(select) {
+  border: none;
+}
+option {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  border: 2px solid #ddd;
+  background: #eee;
+  padding: 10px;
+  transition: 0.4s;
+}
+option:first-of-type {
+  border-radius: 8px 8px 0 0;
+}
+
+option:last-of-type {
+  border-radius: 0 0 8px 8px;
+}
+
+option:not(option:last-of-type) {
+  border-bottom: none;
+}
+option:nth-of-type(odd) {
+  background: #fff;
+}
+
+option:hover,
+option:focus {
+  background: plum;
+}
+option .icon {
+  font-size: 1.6rem;
+  text-box: trim-both cap alphabetic;
+}
+selectedcontent .icon {
+  display: none;
+}
+option:checked {
+  font-weight: bold;
+}
+option::checkmark {
+  order: 1;
+  margin-left: auto;
+  content: "☑️";
+}
+
+optgroup {
+  gap: 20px;
+  border: 2px solid #ddd;
+  background: linear-gradient(135deg, #00c9ff, #92fe9d);
+  padding: 10px;
+}
+
+::picker(select) {
+  opacity: 0;
+  transition: all 0.4s allow-discrete;
+}
+::picker(select):popover-open {
+  opacity: 1;
+}
+@starting-style {
+  ::picker(select):popover-open {
+    opacity: 0;
+  }
+}
+::picker(select) {
+  top: calc(anchor(bottom) + 1px);
+  left: anchor(10%);
+}
 
 /* Search */
 /* Container for search bar */
@@ -309,7 +442,7 @@ table {
 }
 
 th, td {
-  padding: 12px;
+  padding: 0.8rem;
   text-align: center;
   border-bottom: 1px solid #eee;
   white-space: nowrap;
@@ -328,6 +461,12 @@ td {
     background-color: var(--bg-color);
     color: var(--text-color);
 }
+
+td[colspan="3"] {
+      text-align: center;
+      font-style: italic;
+      color: #777;
+    }
 
 tr:hover {
   background-color: var(--hover-color);
@@ -435,7 +574,7 @@ thead th {
 input,
 .modal-content,
 dialog {
-  background-color: var(--bg-color);
+  background: linear-gradient(135deg, #00c9ff, #92fe9d);
   color: var(--text-color);
   border: 1px solid var(--border-color);
 }
