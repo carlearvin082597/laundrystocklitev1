@@ -202,4 +202,4 @@ document.addEventListener('click', (e) => {
   }
 });
 
-window.alert("Welcome to my LaundryStock Lite V1!")
+window.alert("Welcome to LaundryStock Lite V1!")
