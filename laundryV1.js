@@ -201,3 +201,5 @@ document.addEventListener('click', (e) => {
     searchContainer.classList.remove('active');
   }
 });
+
+window.alert("Welcome to my LaundryStock Lite V1!")
